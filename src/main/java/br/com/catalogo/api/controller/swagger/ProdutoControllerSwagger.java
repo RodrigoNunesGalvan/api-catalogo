@@ -2,7 +2,7 @@ package br.com.catalogo.api.controller.swagger;
 
 import br.com.catalogo.api.dto.input.ProdutoInputDto;
 import br.com.catalogo.api.dto.outPut.ProdutoOutputDto;
-import br.com.catalogo.api.excepition.handler.Problem;
+import br.com.catalogo.api.exception.handler.Problem;
 import br.com.catalogo.api.filter.ProdutoFilter;
 import br.com.catalogo.api.filter.ProdutoSpecsFilter;
 import br.com.catalogo.api.model.Produto;

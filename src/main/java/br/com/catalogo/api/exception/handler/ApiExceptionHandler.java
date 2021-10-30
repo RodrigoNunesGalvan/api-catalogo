@@ -1,12 +1,12 @@
-package br.com.catalogo.api.excepition.handler;
+package br.com.catalogo.api.exception.handler;
 
 import java.nio.file.AccessDeniedException;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import br.com.catalogo.api.excepition.BusinessException;
-import br.com.catalogo.api.excepition.EntidadeNaoEncontradaException;
+import br.com.catalogo.api.exception.BusinessException;
+import br.com.catalogo.api.exception.EntidadeNaoEncontradaException;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;

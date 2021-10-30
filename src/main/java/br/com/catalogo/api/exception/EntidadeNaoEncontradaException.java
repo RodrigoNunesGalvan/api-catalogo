@@ -1,4 +1,4 @@
-package br.com.catalogo.api.excepition;
+package br.com.catalogo.api.exception;
 
 public abstract class EntidadeNaoEncontradaException extends BusinessException {
 

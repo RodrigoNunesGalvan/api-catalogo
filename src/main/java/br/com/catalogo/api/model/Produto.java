@@ -1,21 +1,19 @@
 package br.com.catalogo.api.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 
-@Data
+@Getter
+@Setter
 @Entity
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "CATALOGO_PRODUTO", schema = "PRODUTO")
+@Builder
+@Table(name = "PRODUCT", schema = "CATALOG_PRODUCT")
 public class Produto {
 
     @Id
@@ -24,7 +22,7 @@ public class Produto {
     private Long produtoId;
 
     @NotNull(message = "O valor campo não pode ser nulo")
-    @Column(name = "NAME")
+    @Column(name = "PRODUCT_NAME")
     private String name;
 
     @NotNull(message = "O valor campo não pode ser nulo")

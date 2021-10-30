@@ -1,37 +1,42 @@
 package br.com.catalogo.api.service;
 
+
 import br.com.catalogo.api.dto.input.ProdutoInputDto;
 import br.com.catalogo.api.dto.outPut.ProdutoOutputDto;
-import br.com.catalogo.api.excepition.EntidadeNaoEncontradaException;
+import br.com.catalogo.api.exception.EntidadeNaoEncontradaException;
 import br.com.catalogo.api.filter.ProdutoFilter;
 import br.com.catalogo.api.filter.ProdutoSpecsFilter;
+import br.com.catalogo.api.mapper.ProdutoMapper;
 import br.com.catalogo.api.model.Produto;
 import br.com.catalogo.api.repository.ProdutoRepository;
 import br.com.catalogo.api.repository.specification.ProdutoSpecification;
 import br.com.catalogo.api.repository.specification.ProdutoSpecs;
-import org.springframework.stereotype.Service;
 import static br.com.catalogo.api.model.ProdutoSpecifications.hasName;
 import static br.com.catalogo.api.model.ProdutoSpecifications.hasProdutoId;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Service;
 
 
 @Service
 public class ProdutoService {
 
-    @Autowired(required = true)
+    @Autowired
     private ProdutoRepository repository;
 
     @Autowired
-    private ModelMapper mapper;
+    private ProdutoMapper mapper;
 
     @Transactional
     public ProdutoOutputDto save(ProdutoInputDto produto) {
+
         Produto savedModel = repository.save(mapper.inputDtoToModel(produto));
+
         return mapper.modelToOutputDto(savedModel);
     }
 
@@ -46,11 +51,9 @@ public class ProdutoService {
     }
 
     public Page<Produto> findByNameAndNumber(ProdutoSpecsFilter filter, Pageable pageable){
-        Page<Produto> listaComProdutosEPrecos =  repository.findAll(ProdutoSpecs.comNomeSemelhante(filter.getProductName()).and(ProdutoSpecs.listaDePrecos(filter.getProductPrice())),pageable);
-        return listaComProdutosEPrecos;
+        return repository.findAll(ProdutoSpecs.comNomeSemelhante(filter.getProductName()).and(ProdutoSpecs.listaDePrecos(filter.getProductPrice())),pageable);
     }
 
-    @SuppressWarnings("serial")
     public ProdutoOutputDto findById(Long id){
         Produto model = repository.findById(id).orElseThrow(() -> new  EntidadeNaoEncontradaException("O Produto de ID: "+id+" Não foi encontrado"){});
         return mapper.modelToOutputDto(model);
@@ -65,7 +68,6 @@ public class ProdutoService {
         return mapper.modelToOutputDto(repository.save(model));
     }
 
-    @SuppressWarnings("serial")
     @Transactional
     public void delete(Long id) {
 
@@ -78,7 +80,4 @@ public class ProdutoService {
         Page<Produto> page = repository.findAll(hasProdutoId(filter.getProdutoId()).and(hasName(filter.getName())), pageable);
         return page.map(produto -> mapper.modelToOutputDto(produto));
     }
-
-
-}
 }

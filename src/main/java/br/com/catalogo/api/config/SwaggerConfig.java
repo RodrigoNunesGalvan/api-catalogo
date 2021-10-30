@@ -47,13 +47,13 @@ import java.util.List;
 @Import(BeanValidatorPluginsConfiguration.class)
 public class SwaggerConfig implements WebMvcConfigurer {
 
-    @Bean
+	@Bean
     public Docket apiDocket() {
         TypeResolver typeResolver = new TypeResolver();
 
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("br.com.vonex.api"))
+                .apis(RequestHandlerSelectors.basePackage("br.com.catalogo.api"))
                 .paths(PathSelectors.any())
                 .build()
                 .useDefaultResponseMessages(false)
@@ -74,7 +74,7 @@ public class SwaggerConfig implements WebMvcConfigurer {
 
     private SecurityScheme securityScheme() {
         return new OAuthBuilder()
-                .name("Vonex")
+                .name("Catalogo")
                 .grantTypes(grantTypes())
                 .scopes(scopes())
                 .build();
@@ -82,7 +82,7 @@ public class SwaggerConfig implements WebMvcConfigurer {
 
     private SecurityContext securityContext() {
         SecurityReference securityReference = SecurityReference.builder()
-                .reference("Vonex")
+                .reference("Catalogo")
                 .scopes(scopes().toArray(new AuthorizationScope[0]))
                 .build();
 

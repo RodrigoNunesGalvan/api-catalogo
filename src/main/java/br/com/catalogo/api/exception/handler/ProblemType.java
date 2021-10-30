@@ -1,4 +1,4 @@
-package br.com.catalogo.api.excepition.handler;
+package br.com.catalogo.api.exception.handler;
 
 import lombok.Getter;
 
