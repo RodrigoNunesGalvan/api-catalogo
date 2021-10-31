@@ -23,7 +23,8 @@ public interface ProdutoControllerSwagger {
 
     @ApiOperation(value = "Busca todos os Produtos", httpMethod = "GET")
     @ApiResponses({
-            @ApiResponse(code = 200, response = Produto.class, message = "Requisição com sucesso")
+            @ApiResponse(code = 200, response = Produto.class, message = "Requisição com sucesso"),
+            @ApiResponse(code = 404, response = Problem.class, message = "O recurso não foi encontrado")
     })
     ResponseEntity<Page<ProdutoOutputDto>>findAll(Pageable pageable, ProdutoFilter filter);
 

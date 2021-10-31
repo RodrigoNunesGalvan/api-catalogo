@@ -8,6 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produto, Long>, ProdutoFilterRepository, JpaSpecificationExecutor<Produto> {
-    Produto findByConferenceId(String conferenceId);
-    Optional<Produto> findByClientId(Long id);
+    Produto findByName(String name);
+    Optional<Produto> findByProdutoId(Long id);
 }

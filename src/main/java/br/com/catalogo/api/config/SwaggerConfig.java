@@ -47,15 +47,16 @@ import java.util.List;
 @Import(BeanValidatorPluginsConfiguration.class)
 public class SwaggerConfig implements WebMvcConfigurer {
 
+	@SuppressWarnings("deprecation")
 	@Bean
     public Docket apiDocket() {
         TypeResolver typeResolver = new TypeResolver();
 
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("br.com.catalogo.api"))
-                .paths(PathSelectors.any())
-                .build()
+                    .apis(RequestHandlerSelectors.basePackage("br.com.catalogo.api"))
+                    .paths(PathSelectors.any())
+                    .build()
                 .useDefaultResponseMessages(false)
                 .globalResponseMessage(RequestMethod.GET, globalGetResponseMessages())
                 .globalResponseMessage(RequestMethod.POST, globalPostPutResponseMessages())
@@ -68,8 +69,7 @@ public class SwaggerConfig implements WebMvcConfigurer {
                 .directModelSubstitute(Pageable.class, PageableSwagger.class)
                 .securitySchemes(Arrays.asList(securityScheme()))
                 .securityContexts(Arrays.asList(securityContext()))
-                .apiInfo(apiInfo())
-                ;
+                .apiInfo(apiInfo());
     }
 
     private SecurityScheme securityScheme() {
@@ -80,7 +80,8 @@ public class SwaggerConfig implements WebMvcConfigurer {
                 .build();
     }
 
-    private SecurityContext securityContext() {
+    @SuppressWarnings("deprecation")
+	private SecurityContext securityContext() {
         SecurityReference securityReference = SecurityReference.builder()
                 .reference("Catalogo")
                 .scopes(scopes().toArray(new AuthorizationScope[0]))
@@ -101,7 +102,8 @@ public class SwaggerConfig implements WebMvcConfigurer {
                 new AuthorizationScope("write", "Acesso de escrita"));
     }
 
-    private List<ResponseMessage> globalGetResponseMessages() {
+    @SuppressWarnings("deprecation")
+	private List<ResponseMessage> globalGetResponseMessages() {
         return Arrays.asList(
                 new ResponseMessageBuilder()
                         .code(HttpStatus.INTERNAL_SERVER_ERROR.value())
@@ -115,7 +117,8 @@ public class SwaggerConfig implements WebMvcConfigurer {
         );
     }
 
-    private List<ResponseMessage> globalPostPutResponseMessages() {
+    @SuppressWarnings("deprecation")
+	private List<ResponseMessage> globalPostPutResponseMessages() {
         return Arrays.asList(
                 new ResponseMessageBuilder()
                         .code(HttpStatus.BAD_REQUEST.value())
@@ -139,7 +142,8 @@ public class SwaggerConfig implements WebMvcConfigurer {
         );
     }
 
-    private List<ResponseMessage> globalDeleteResponseMessages() {
+    @SuppressWarnings("deprecation")
+	private List<ResponseMessage> globalDeleteResponseMessages() {
         return Arrays.asList(
                 new ResponseMessageBuilder()
                         .code(HttpStatus.BAD_REQUEST.value())
@@ -159,7 +163,7 @@ public class SwaggerConfig implements WebMvcConfigurer {
                 .title("Catálogo - Produto")
                 .description("API de Catálogo de Produtos")
                 .version("1.0")
-                .contact(new Contact("XPTO", "https://www.xpto.com.br", "contato@xpto.com.br"))
+                .contact(new Contact("xpto", "https://www.xpto.com.br", "contato@xpto.com.br"))
                 .build();
     }
 

@@ -14,7 +14,6 @@ import br.com.catalogo.api.repository.specification.ProdutoSpecs;
 import static br.com.catalogo.api.model.ProdutoSpecifications.hasName;
 import static br.com.catalogo.api.model.ProdutoSpecifications.hasProdutoId;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
