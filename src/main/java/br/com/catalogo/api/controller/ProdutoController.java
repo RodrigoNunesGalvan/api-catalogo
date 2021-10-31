@@ -49,7 +49,7 @@ public class ProdutoController implements ProdutoControllerSwagger {
     @GetMapping(value = "/produtos", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.OK)
     public Page<Produto> findByNameAndNumber(ProdutoSpecsFilter filter, Pageable pageable) {
-        Page<Produto> dto = service.find    ByNameAndNumber(filter, pageable);
+        Page<Produto> dto = service.findByNameAndNumber(filter, pageable);
         return dto;
     }
 
